@@ -32,7 +32,7 @@ public class VentanaController implements Initializable {
             File selectedDirectory = directoryChooser.showDialog(null);
             if(selectedDirectory != null)
                 System.out.println(selectedDirectory.getAbsolutePath());
-
+                System.out.println("Holas");
     }
     
 }
