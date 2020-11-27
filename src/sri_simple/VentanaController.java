@@ -12,12 +12,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import static javafx.print.PrintColor.COLOR;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebView;
 import javafx.stage.DirectoryChooser;
+import solr_io.*;
 
 /**
  * FXML Controller class
@@ -37,6 +40,18 @@ public class VentanaController implements Initializable {
     
     @FXML
     WebView vistaWeb;
+    
+    @FXML
+    TextArea consola_out;
+    
+    @FXML
+    TextField consola_in;
+    
+    @FXML
+    Button bt_ejecutar;
+    
+    @FXML
+    WebView buscador;
 
     Boolean linux;
     
@@ -49,7 +64,7 @@ public class VentanaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Holas");
+        System.out.println("OK");
         
         String SO = System.getProperty("os.name");
         if(SO.startsWith("Windows")) 
@@ -92,19 +107,27 @@ public class VentanaController implements Initializable {
     }
     
     public void interruptor_Solr(){
+        if(solr_dir.getText().isEmpty()){
+            Alert al = new Alert(AlertType.ERROR);
+            al.setTitle("Error Directorio Solr");
+            al.setHeaderText("Algo va mal!");
+            al.setContentText("No se encuentra el directorio de Solr.");
+            al.showAndWait();
+        }
         check_estado();
         if(encendido == false){
             boton_OnOff.disableProperty().set(true);
             boton_OnOff.setDisable(true);
-            ejecutar("bin/solr start");
+            ejecutar("bin/solr start -c");
             solr_estado.setText("ON");
             solr_estado.setStyle("-fx-text-fill: #20e634;");
             boton_OnOff.disableProperty().set(false);
+            mostrarPanelAdmin();
         }else{
             boton_OnOff.disableProperty().set(true);
             ejecutar("bin/solr stop -all");
             solr_estado.setText("OFF");
-            solr_estado.setStyle("-fx-text-fill: #ff2200;");
+            solr_estado.setStyle("-fx-text-fill: #eb0e0e;");
             boton_OnOff.disableProperty().set(false);
         }
     }
@@ -120,7 +143,7 @@ public class VentanaController implements Initializable {
             while ((lectura = br.readLine()) != null){
                 System.out.println("line: " + lectura);
                 if(!lectura.isEmpty())
-                    salida += lectura + " ";
+                    salida += lectura + "\n";
             }
             p.waitFor();
             System.out.println ("exit: " + p.exitValue());
@@ -129,7 +152,38 @@ public class VentanaController implements Initializable {
             //e.printStackTrace();
         }
         
+        consola_out.setText(salida);
         return salida;
+    }
+    
+    private void mostrarPanelAdmin(){
+        this.vistaWeb.getEngine().load("http://localhost:8983/solr/");
+    }
+    
+    public void ejecutar_comando(){
+        String c = consola_in.getText();
+        consola_in.clear();
+        if(c.contains("start") || c.contains("stop")){
+            interruptor_Solr();
+        }else{
+            ejecutar(c);
+        }
+        
+    }
+    
+    public void acerca(){
+        Alert al = new Alert(AlertType.INFORMATION);
+        al.setTitle("Acerca de ");
+        al.setHeaderText("Informacion sobre el programa");
+        al.setContentText("Este es un programa para la practica de\n"
+            + "la asignatura Motores de Busqueda\nde la universidad de Huelva."
+            + "\n\n\nAutor: Joseram0n");
+  
+        al.showAndWait();
+    }
+    
+    public void actualizar_colecciones(){
+        
     }
     
 }

@@ -39,7 +39,7 @@ public class SolrAdd {
             SolrInputDocument doc = new SolrInputDocument();
             doc.addField("id", d.id.replaceAll("[^0-9]", ""));
             doc.addField("title", d.titulo);
-            doc.addField("texto", d.texto);
+            doc.addField("text", d.texto);
             client.add(doc);
         }
 

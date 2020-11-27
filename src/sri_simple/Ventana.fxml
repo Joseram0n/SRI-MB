@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -19,7 +21,7 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu mnemonicParsing="false" text="Archivo">
           <items>
             <MenuItem mnemonicParsing="false" text="New" />
             <MenuItem mnemonicParsing="false" text="Open…" />
@@ -35,7 +37,7 @@
             <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
+        <Menu mnemonicParsing="false" text="Editar">
           <items>
             <MenuItem mnemonicParsing="false" text="Undo" />
             <MenuItem mnemonicParsing="false" text="Redo" />
@@ -49,9 +51,9 @@
             <MenuItem mnemonicParsing="false" text="Unselect All" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu mnemonicParsing="false" text="Ayuda">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem mnemonicParsing="false" onAction="#acerca" text="Acerca de SRI" />
           </items>
         </Menu>
       </menus>
@@ -64,7 +66,7 @@
                      <children>
                         <TabPane layoutX="3.0" prefHeight="571.0" prefWidth="790.0" style="-fx-background-color: gray;" styleClass="defaul-tab-pane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
-                            <Tab text="Estado">
+                            <Tab text="Principal">
                               <content>
                                     <VBox>
                                        <children>
@@ -89,16 +91,21 @@
                                                 <Insets />
                                              </VBox.margin>
                                           </AnchorPane>
-                                          <AnchorPane prefHeight="382.0" prefWidth="789.0" style="-fx-background-color: #b0995b;" VBox.vgrow="ALWAYS" />
+                                          <AnchorPane prefHeight="382.0" prefWidth="789.0" style="-fx-background-color: #334a59;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextArea fx:id="consola_out" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="757.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="14.0" />
+                                                <TextField fx:id="consola_in" layoutX="14.0" layoutY="338.0" onAction="#ejecutar_comando" prefHeight="26.0" prefWidth="671.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="104.0" />
+                                                <Button fx:id="bt_ejecutar" layoutX="699.0" layoutY="338.0" mnemonicParsing="false" onAction="#ejecutar_comando" text="Ejecutar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="18.0" />
+                                             </children></AnchorPane>
                                        </children>
                                     </VBox>
                               </content>
                             </Tab>
-                            <Tab text="Panel Administrador">
+                            <Tab text="Panel Administrador (Web) ">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <WebView fx:id="vistaWeb" layoutX="35.0" layoutY="16.0" prefHeight="508.0" prefWidth="728.0" />
+                                          <WebView fx:id="vistaWeb" prefHeight="535.0" prefWidth="789.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -110,9 +117,41 @@
           </Tab>
           <Tab text="SRI - Normal">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="867.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="867.0" style="-fx-background-color: black;">
+                     <children>
+                        <TabPane layoutX="3.0" layoutY="58.0" prefHeight="571.0" prefWidth="789.0" style="-fx-background-color: blue;" styleClass="default-tab-pane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <tabs>
+                            <Tab text="Untitled Tab 1">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="756.0" />
+                              </content>
+                            </Tab>
+                            <Tab text="Untitled Tab 2">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="715.0" />
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="SRI - Mejorado">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Buscador">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="863.0" style="-fx-background-color: #000066;">
+                     <children>
+                        <WebView fx:id="buscador" layoutX="14.0" layoutY="76.0" prefHeight="482.0" prefWidth="763.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="76.0" />
+                        <ComboBox layoutX="14.0" layoutY="39.0" prefHeight="26.0" prefWidth="203.0" promptText="Seleccione..." />
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="136.0" text="Coleccion a buscar:" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
   </children>
