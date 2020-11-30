@@ -19,7 +19,7 @@ import org.apache.solr.common.SolrDocumentList;
  * @author joseram0n
  */
 public class SolrSearch {
-
+    /*
     public static void main(String[] args) throws IOException,
             SolrServerException {
 
@@ -29,9 +29,9 @@ public class SolrSearch {
         
         sp.leer_preguntas("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA.QUE");
 
-        ArrayList<SolrParser.Pregunta> prg = sp.get_preg();
+        ArrayList<Pregunta> prg = sp.get_preg();
 
-        for (SolrParser.Pregunta p : prg) {
+        for (Pregunta p : prg) {
             SolrQuery query = new SolrQuery();
             String[] aux = p.pre.split(" ");
             String preg5 = new String();
@@ -47,16 +47,16 @@ public class SolrSearch {
                 System.out.println(docs.get(i));
             }
         }
-        /*
-        query.setQuery("*:villa");
+        
+        //query.setQuery("*:villa");
         //query.setQuery("Apple");
         //query.addFilterQuery("cat:electronics");
         //query.setFields("id","price","merchant","cat","store");
-        QueryResponse rsp = solr.query(query);
-        SolrDocumentList docs = rsp.getResults();
-        for (int i = 0; i < docs.size(); ++i) {
-            System.out.println(docs.get(i));
-        }
-         */
-    }
+        //QueryResponse rsp = solr.query(query);
+        //SolrDocumentList docs = rsp.getResults();
+        //for (int i = 0; i < docs.size(); ++i) {
+        //    System.out.println(docs.get(i));
+        //}
+         
+    }*/
 }

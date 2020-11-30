@@ -18,7 +18,19 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.common.SolrInputDocument;
 
 public class SolrAdd {
-
+    
+    SolrClient client;
+    
+    SolrParser sp;
+    
+    public SolrAdd(){
+        
+        client = new HttpSolrClient.Builder("http://localhost:8983/solr/corpus").build();
+        
+        sp = new SolrParser();
+        
+    }
+    /*
     public static void main(String[] args) throws IOException, SolrServerException {
         System.out.println("Hola");
         
@@ -33,9 +45,9 @@ public class SolrAdd {
         
         System.out.println("Hola2");
         //Create solr document
-        ArrayList<SolrParser.Documento> rawDocs = sp.get_docs();
+        ArrayList<Documento> rawDocs = sp.get_docs();
         
-        for(SolrParser.Documento d : rawDocs){
+        for(Documento d : rawDocs){
             SolrInputDocument doc = new SolrInputDocument();
             doc.addField("id", d.id.replaceAll("[^0-9]", ""));
             doc.addField("title", d.titulo);
@@ -49,5 +61,6 @@ public class SolrAdd {
         
                 
     }
+*/
 
 }

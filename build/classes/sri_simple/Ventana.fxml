@@ -10,6 +10,8 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -115,15 +117,27 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="SRI - Normal">
+          <Tab fx:id="sriNormalTab" text="SRI - Normal">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="867.0" style="-fx-background-color: black;">
                      <children>
-                        <TabPane layoutX="3.0" layoutY="58.0" prefHeight="571.0" prefWidth="789.0" style="-fx-background-color: blue;" styleClass="default-tab-pane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TabPane layoutX="3.0" layoutY="58.0" prefHeight="571.0" prefWidth="789.0" style="-fx-background-color: #c2c2a3;" styleClass="default-tab-pane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
-                            <Tab text="Untitled Tab 1">
+                            <Tab text="Indexar">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="756.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="756.0">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="157.0" text="Documentos a indexar:" />
+                                          <TableView layoutX="14.0" layoutY="41.0" prefHeight="300.0" prefWidth="761.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="41.0">
+                                            <columns>
+                                              <TableColumn editable="false" prefWidth="151.0" text="Nombre Archivo" />
+                                              <TableColumn editable="false" minWidth="0.0" prefWidth="130.0" text="Nº Documentos" />
+                                                <TableColumn editable="false" prefWidth="83.0" text="Indexado" />
+                                            </columns>
+                                          </TableView>
+                                          <Button fx:id="selecParaIndexar" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#seleccionarFicheros" text="Seleccionar" />
+                                          <Button layoutX="148.0" layoutY="362.0" mnemonicParsing="false" text="Indexar" />
+                                       </children></AnchorPane>
                               </content>
                             </Tab>
                             <Tab text="Untitled Tab 2">
@@ -136,12 +150,12 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="SRI - Mejorado">
+            <Tab fx:id="sriMejoradoTab" text="SRI - Mejorado">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab text="Buscador">
+            <Tab fx:id="buscadorTab" text="Buscador">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="863.0" style="-fx-background-color: #000066;">
                      <children>

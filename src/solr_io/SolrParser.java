@@ -2,8 +2,11 @@ package solr_io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.apache.solr.common.SolrDocumentList;
 
 /**
  * Clase que parsea corpus y preguntas
@@ -12,46 +15,10 @@ import java.util.Scanner;
  */
 public class SolrParser {
 
-    /**
-     * Subclase documento, contiene la estructura de un documento.
-     */
-    public class Documento {
+    public ArrayList<Documento> leer_doc(String doc_path) {
 
-        String id;
-        String titulo;
-        String texto;
+        ArrayList<Documento> docs = new ArrayList<>();
 
-        public Documento() {
-            id = new String();
-            titulo = new String();
-            texto = new String();
-        }
-    }
-
-    /**
-     * Subclase pregunta, contiene la estructura de una pregunta.
-     */
-    public class Pregunta {
-
-        int id;
-        String pre;
-
-        public Pregunta() {
-            id = 0;
-            pre = new String();
-        }
-    }
-
-    ArrayList<Documento> docs;
-
-    ArrayList<Pregunta> preg;
-
-    public SolrParser() {
-        docs = new ArrayList<>();
-        preg = new ArrayList<>();
-    }
-
-    public void leer_doc(String doc_path) {
         try {
             File d = new File(doc_path);
             Scanner sc = new Scanner(d);
@@ -81,19 +48,14 @@ public class SolrParser {
             System.out.println("Error leyendo la movida");
             e.printStackTrace();
         }
-    }
 
-    public void print_doc(int n) {
-        System.out.println("\nID: " + docs.get(n).id + "\nTitulo: "
-                + docs.get(n).titulo + "\nTexto: "
-                + docs.get(n).texto);
-    }
-
-    public ArrayList<Documento> get_docs() {
         return docs;
     }
 
-    public void leer_preguntas(String doc_path) {
+    public ArrayList<Pregunta> leer_preguntas(String doc_path) {
+
+        ArrayList<Pregunta> preg = new ArrayList<>();
+
         try {
             File d = new File(doc_path);
             Scanner sc = new Scanner(d);
@@ -101,10 +63,10 @@ public class SolrParser {
             while (sc.hasNextLine()) {
                 Pregunta p = new Pregunta();
 
-                p.id = Integer.parseInt(sc.nextLine());
+                p.id = sc.nextLine();
 
                 while (!sc.hasNext("#")) {
-                    p.pre += sc.next() + " ";
+                    p.texto += sc.next() + " ";
                 }
 
                 sc.nextLine();
@@ -116,14 +78,34 @@ public class SolrParser {
             System.out.println("Error leyendo la movida");
             e.printStackTrace();
         }
-    }
 
-    public void print_pregunta(int n) {
-        System.out.println("\nID: " + preg.get(n).id + "\nPREGUNTA: "
-                + preg.get(n).pre);
-    }
-
-    public ArrayList<Pregunta> get_preg() {
         return preg;
     }
+
+    public boolean crear_trec_file(ArrayList<SolrDocumentList> resp_docs, String rutaArchivo) throws IOException {
+        try {
+            File f = new File(rutaArchivo);
+            PrintWriter pw = new PrintWriter(f);
+            for (int i = 0; i < resp_docs.size(); i++) {
+                SolrDocumentList sdl = resp_docs.get(i);
+                for (int d = 0; d < sdl.size(); d++) {
+                    System.out.println("Indx_ArrayList " + i + " Indx_SolrDocList " + d);
+                    //Consulta Q0 documento ranking score EQUIPO
+                    pw.println(i + " Q0 " + sdl.get(d).getFieldValue("id") + " " + d + " " + sdl.get(d).getFieldValue("score") + " Joseram0n");
+                }
+
+            }
+
+            pw.close();
+
+        } catch (Exception e) {
+            System.out.println("Algo fuel mal al guardar el trec file \n" + e.getMessage());
+        }
+
+        return false;
+    }
+
 }
+
+
+//TODO: arreglar espascios de mas al final de los string
