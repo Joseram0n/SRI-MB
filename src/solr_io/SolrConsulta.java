@@ -74,7 +74,7 @@ public class SolrConsulta {
             for (int i = 0; i < 5; i++) {
                 preg5 = preg5 + " " + aux[i];
             }
-            query.setQuery("text:" + preg5);
+            query.setQuery("text:" + preg5 + " OR title:" + preg5);
             query.setFields("fl", "*,score");
             //System.out.println(preg5);
             //query.setFields("id", "title", "text");

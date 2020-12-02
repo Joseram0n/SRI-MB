@@ -86,9 +86,11 @@ public class test {
         
         //test1();
         //test2();
-        test3();
+        //test3();
         
-        //SolrParser sp =  new SolrParser();
+        SolrParser sp =  new SolrParser();
+        
+        sp.generar_consultas_relevantes("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISARJ.NUM");
         
         //sp.leer_preguntas("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA.QUE");
         //System.out.println("Preguntas leidas...\n");
