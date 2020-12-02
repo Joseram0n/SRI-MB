@@ -166,6 +166,8 @@ public class SolrParser {
             
             pw.close();
             
+            return true;
+            
             
         } catch (Exception e) {
             System.out.println("Algo salio mal generando el qrel");
