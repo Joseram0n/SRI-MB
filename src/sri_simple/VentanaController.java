@@ -18,6 +18,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebView;
@@ -74,6 +75,9 @@ public class VentanaController implements Initializable {
     
     @FXML
     Tab buscadorTab;
+    
+    @FXML
+    TableView tablaIndex;
 
     /**
      * Initializes the controller class.
@@ -98,6 +102,7 @@ public class VentanaController implements Initializable {
 
     }
 
+    //[fcom] para enconjer en netbeans
 //<editor-fold defaultstate="collapsed" desc="Ventana: Servidor Solr">
     public void abrir_directorio_solr() {
 
@@ -208,7 +213,9 @@ public class VentanaController implements Initializable {
     }
 
     public void actualizar_colecciones() {
-
+        //tablaIndex.
+        
+        //TODO: movida de la tabla
     }
 
     //TODO: terminar indexacion de ficheros mediante GUI
@@ -217,7 +224,7 @@ public class VentanaController implements Initializable {
         selecFicheros = new FileChooser();
         selecFicheros.setTitle("Seleccione los ficheros para indexar");
         selecFicheros.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("All Files", "*.*"));
-
+        
         docsParaIndex = selecFicheros.showOpenMultipleDialog(null);
         
     }

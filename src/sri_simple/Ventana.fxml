@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
+<?import org.controlsfx.glyphfont.Glyph?>
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sri_simple.VentanaController">
   <children>
@@ -128,15 +129,17 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="756.0">
                                        <children>
                                           <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="157.0" text="Documentos a indexar:" />
-                                          <TableView layoutX="14.0" layoutY="41.0" prefHeight="300.0" prefWidth="761.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="41.0">
+                                          <TableView fx:id="tablaIndex" layoutX="14.0" layoutY="41.0" prefHeight="300.0" prefWidth="378.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="397.0" AnchorPane.topAnchor="41.0">
                                             <columns>
-                                              <TableColumn editable="false" prefWidth="151.0" text="Nombre Archivo" />
-                                              <TableColumn editable="false" minWidth="0.0" prefWidth="130.0" text="Nº Documentos" />
+                                              <TableColumn editable="false" prefWidth="141.0" text="Nombre Archivo" />
+                                              <TableColumn editable="false" minWidth="0.0" prefWidth="140.0" text="Nº Documentos" />
                                                 <TableColumn editable="false" prefWidth="83.0" text="Indexado" />
                                             </columns>
                                           </TableView>
                                           <Button fx:id="selecParaIndexar" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#seleccionarFicheros" text="Seleccionar" />
-                                          <Button layoutX="148.0" layoutY="362.0" mnemonicParsing="false" text="Indexar" />
+                                          <Button layoutX="564.0" layoutY="242.0" mnemonicParsing="false" text="Indexar" />
+                                          <ComboBox layoutX="502.0" layoutY="178.0" prefHeight="26.0" prefWidth="192.0" promptText="Selecciona un core..." />
+                                          <Glyph fontFamily="FontAwesome" layoutX="443.0" layoutY="184.0" />
                                        </children></AnchorPane>
                               </content>
                             </Tab>
