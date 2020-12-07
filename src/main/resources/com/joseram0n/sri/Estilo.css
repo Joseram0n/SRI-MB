@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27 oct. 2020, 11:57:23
+    Author     : joseram0n
+*/
+
+.main-tab-pane .tab *.tab-label {
+    -fx-rotate: 90;
+}
+
+.main-tab-pane .tab {
+    -fx-padding: 3em 0.5em 3em 0.5em;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.default-tab-pane .tab { 
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+.default-tab-pane .tab *.tab-label {
+    -fx-rotate: 360;
+}
