@@ -29,7 +29,7 @@ public class SolrParser {
                 String aux = new String();
 
                 doc.id = sc.nextLine();
-                while (!(aux = sc.nextLine()).isEmpty()) {
+                while (!(aux = sc.nextLine()).isBlank()) {
                     if (aux != null) {
                         doc.titulo += aux + " ";
                     }
@@ -41,7 +41,7 @@ public class SolrParser {
 
                 //sc.skip("[***]+");
                 sc.nextLine();
-
+                
                 docs.add(doc);
             }
 
@@ -180,4 +180,4 @@ public class SolrParser {
 }
 
 
-//TODO: arreglar espascios de mas al final de los string
+//TODO: arreglar espacios de mas al final de los string

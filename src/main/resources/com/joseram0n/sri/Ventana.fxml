@@ -130,20 +130,24 @@
                                           <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="157.0" text="Documentos a indexar:" />
                                           <TableView fx:id="tablaIndex" layoutX="14.0" layoutY="41.0" prefHeight="300.0" prefWidth="378.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="397.0" AnchorPane.topAnchor="41.0">
                                             <columns>
-                                              <TableColumn editable="false" prefWidth="141.0" text="Nombre Archivo" />
-                                              <TableColumn editable="false" minWidth="0.0" prefWidth="140.0" text="Nº Documentos" />
-                                                <TableColumn editable="false" prefWidth="83.0" text="Indexado" />
+                                              <TableColumn fx:id="nameFile" editable="false" prefWidth="141.0" text="Nombre Archivo" />
+                                              <TableColumn fx:id="nDocuments" editable="false" minWidth="0.0" prefWidth="140.0" text="Nº Documentos" />
+                                              <TableColumn fx:id="status_index" editable="false" prefWidth="83.0" text="Indexado" />
                                             </columns>
                                           </TableView>
                                           <Button fx:id="selecParaIndexar" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#seleccionarFicheros" text="Seleccionar" />
-                                          <Button layoutX="564.0" layoutY="242.0" mnemonicParsing="false" text="Indexar" />
-                                          <ComboBox layoutX="502.0" layoutY="178.0" prefHeight="26.0" prefWidth="192.0" promptText="Selecciona un core..." />
+                                          <Button layoutX="564.0" layoutY="242.0" mnemonicParsing="false" onAction="#indexar_docs" text="Indexar" />
+                                          <ComboBox fx:id="core_selec" layoutX="502.0" layoutY="178.0" onContextMenuRequested="#actualizar_colecciones" onShown="#actualizar_colecciones" prefHeight="26.0" prefWidth="192.0" promptText="Selecciona un core..." />
                                        </children></AnchorPane>
                               </content>
                             </Tab>
-                            <Tab text="Untitled Tab 2">
+                            <Tab text="Buscar">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="715.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="715.0">
+                                       <children>
+                                          <Button layoutX="34.0" layoutY="97.0" mnemonicParsing="false" onAction="#cargarPreg" text="CargarPreguntas" />
+                                          <Button layoutX="34.0" layoutY="242.0" mnemonicParsing="false" onAction="#crear_trec_file" text="Crear trec file" />
+                                       </children></AnchorPane>
                               </content>
                             </Tab>
                           </tabs>
@@ -151,12 +155,12 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="sriMejoradoTab" text="SRI - Mejorado">
+            <Tab fx:id="sriMejoradoTab" disable="true" text="SRI - Mejorado">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab fx:id="buscadorTab" text="Buscador">
+            <Tab fx:id="buscadorTab" disable="true" text="Buscador">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="863.0" style="-fx-background-color: #000066;">
                      <children>

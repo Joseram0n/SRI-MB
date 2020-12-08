@@ -7,23 +7,34 @@ package com.joseram0n.sri;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.web.WebView;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javax.swing.text.TabableView;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.common.SolrDocumentList;
 import solr_io.*;
 
 /**
@@ -66,18 +77,32 @@ public class VentanaController implements Initializable {
     FileChooser selecFicheros;
 
     List<File> docsParaIndex;
-    
+
     @FXML
     Tab sriNormalTab;
-    
+
     @FXML
     Tab sriMejoradoTab;
-    
+
     @FXML
     Tab buscadorTab;
-    
+
     @FXML
-    TableView tablaIndex;
+    TableView<ModeloTablaSRI> tablaIndex;
+
+    @FXML
+    TableColumn<ModeloTablaSRI, String> nameFile;
+
+    @FXML
+    TableColumn<ModeloTablaSRI, Integer> nDocuments;
+
+    @FXML
+    TableColumn<ModeloTablaSRI, String> status_index;
+
+    @FXML
+    ComboBox<String> core_selec;
+    
+    ArrayList<SolrDocumentList> sdl;
 
     /**
      * Initializes the controller class.
@@ -90,7 +115,7 @@ public class VentanaController implements Initializable {
         sriNormalTab.setDisable(true);
         sriMejoradoTab.setDisable(true);
         buscadorTab.setDisable(true);
-        */
+         */
         String SO = System.getProperty("os.name");
         if (SO.startsWith("Windows")) {
             linux = false;
@@ -99,6 +124,10 @@ public class VentanaController implements Initializable {
         }
 
         encendido = false;
+
+        nameFile.setCellValueFactory(new PropertyValueFactory<>("nombreArchivo"));
+        nDocuments.setCellValueFactory(new PropertyValueFactory<>("n_docs"));
+        status_index.setCellValueFactory(new PropertyValueFactory<>("estado_index"));
 
     }
 
@@ -188,7 +217,7 @@ public class VentanaController implements Initializable {
     private void mostrarPanelAdmin() {
         this.vistaWeb.getEngine().load("http://localhost:8983/solr/");
     }
-    
+
     public void ejecutar_comando() {
         String c = consola_in.getText();
         consola_in.clear();
@@ -213,9 +242,17 @@ public class VentanaController implements Initializable {
     }
 
     public void actualizar_colecciones() {
-        //tablaIndex.
-        
-        //TODO: movida de la tabla
+
+        SolrConsulta sc = new SolrConsulta();
+
+        try {
+            core_selec.getItems().setAll(sc.obtener_nombre_cores());
+        } catch (SolrServerException ex) {
+            Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     //TODO: terminar indexacion de ficheros mediante GUI
@@ -224,10 +261,84 @@ public class VentanaController implements Initializable {
         selecFicheros = new FileChooser();
         selecFicheros.setTitle("Seleccione los ficheros para indexar");
         selecFicheros.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("All Files", "*.*"));
-        
+
         docsParaIndex = selecFicheros.showOpenMultipleDialog(null);
+        actualizar_tabla_indexar(docsParaIndex);
+    }
+
+    public void actualizar_tabla_indexar(List<File> lf) {
+        //Obtener datos
+        List<ModeloTablaSRI> filaTabla = new ArrayList<ModeloTablaSRI>();
+        SolrParser sp = new SolrParser();
+
+        for (File f : lf) {
+            filaTabla.add(new ModeloTablaSRI(f.getName(), sp.leer_doc(f.getAbsolutePath()).size(), "No"));
+        }
+
+        //atualizar tabla
+        tablaIndex.getItems().setAll(filaTabla);
+    }
+
+    public void indexar_docs() {
+        SolrConsulta sc = new SolrConsulta();
+
+        List<ModeloTablaSRI> filas = tablaIndex.getItems();
+        try {
+            for (File file : docsParaIndex) {
+
+                if (sc.indexar(file.getAbsolutePath(),core_selec.getValue())) {
+                    for (ModeloTablaSRI fila : filas) {
+                        if (fila.nombreArchivo == file.getName()) {
+                            fila.estado_index = "Si";
+                        }
+                    }
+                }
+            }
+            
+            tablaIndex.getItems().setAll(filas);
+
+        } catch (SolrServerException ex) {
+            Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cargarPreg(){
+        SolrConsulta sc = new SolrConsulta();
+        
+        selecFicheros = new FileChooser();
+        selecFicheros.setTitle("Seleccione los fichero LISA.QUE");
+        selecFicheros.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("All Files", "*.*"));
+
+         File p = selecFicheros.showOpenDialog(null);
+        if (p!= null) {
+            try {
+                sdl = sc.buscar(p.getAbsolutePath(),core_selec.getValue());
+            } catch (SolrServerException ex) {
+                Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
     }
     
+    public void crear_trec_file(){
+        try {
+            SolrParser sp = new SolrParser();
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            File selectedDirectory = directoryChooser.showDialog(null);
+            if (selectedDirectory != null) {
+                sp.crear_trec_file(sdl, selectedDirectory.getAbsolutePath()+"/trec_top_file.test");
+                System.out.println(selectedDirectory.getAbsolutePath()+"trec_top_file.test");
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
+
+

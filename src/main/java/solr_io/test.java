@@ -34,7 +34,7 @@ public class test {
         SolrConsulta sc = new SolrConsulta();
 
         try {
-            sc.indexar("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA0.001");
+            sc.indexar("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA0.001","corpus");
         } catch (SolrServerException ex) {
             Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -56,7 +56,7 @@ public class test {
         SolrConsulta sc = new SolrConsulta();
         
         try {
-            sc.buscar("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA.QUE");
+            sc.buscar("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA.QUE","corpus");
         } catch (SolrServerException ex) {
             Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -71,7 +71,7 @@ public class test {
         SolrConsulta sc = new SolrConsulta();
         
         try {
-            ArrayList<SolrDocumentList> sdl = sc.buscar("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA.QUE");
+            ArrayList<SolrDocumentList> sdl = sc.buscar("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA.QUE","corpus");
             SolrParser sp = new SolrParser();
             sp.crear_trec_file(sdl, "/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/trec_top_file.txt");
         } catch (SolrServerException ex) {
@@ -88,9 +88,9 @@ public class test {
         //test2();
         //test3();
         
-        SolrParser sp =  new SolrParser();
+        //SolrParser sp =  new SolrParser();
         
-        sp.generar_consultas_relevantes("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISARJ.NUM");
+        //sp.generar_consultas_relevantes("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISARJ.NUM");
         
         //sp.leer_preguntas("/media/joseram0n/PEN32/Motores de Busqueda/Practica_1/corpus/LISA.QUE");
         //System.out.println("Preguntas leidas...\n");
