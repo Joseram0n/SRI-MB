@@ -9,11 +9,12 @@ El proyecto consiste en indexar un corpus (Conjunto de documentos) a [Apache Sol
 Se realizaran **2 versiones**, una sencilla y otra usando la herramienta [GATE](https://gate.ac.uk/ "GATE").   
 Adicionalmente la parte de java se realizara mediante una interfaz de usuario (GUI).
 
-- :computer: SO: [Ubuntu 20.04](https://ubuntu.com/ "Ubuntu")
-- :writing_hand: IDE: [Apache Netbeans 12.1](https://processing.org/ "Netbeans")
+- :computer: SO: [~~Ubuntu 20.04~~ -> Windows 10](https://ubuntu.com/ "Ubuntu")
+- :writing_hand: IDE: [Apache Netbeans 12.2](https://processing.org/ "Netbeans")
 - :abc: JAVA: [Java 11](https://openjdk.java.net/ "OpenJDK")
-- :computer_mouse: JAVAFX: [JavaFX 11](https://openjfx.io/ "JavaFX")
+- :computer_mouse: JAVAFX: [JavaFX 13](https://openjfx.io/ "JavaFX")
 
+El proyecto ya no usa ANT, ahora usa Maven por lo que no deberia ser dificil recrealo y montalo en otro lugar.
 
 ### Entregas :calendar:
 
@@ -23,6 +24,6 @@ Adicionalmente la parte de java se realizara mediante una interfaz de usuario (G
 
 - [x] v0.3 (1/12/2020) Esta versión de la app construye un fichero en formato 'trec_top_file', para poder ejecutar la evaluación con trec_eval.
 
-- [ ] v1.0 (8/12/2020) Entrega de SRI1.
+- [x] v1.0 (8/12/2020) Entrega de SRI1.
 
-- [ ] v2.0 (12/1/2020) Entrega de SRI2.
+- [x] v2.0 (12/1/2020) Entrega de SRI2.
