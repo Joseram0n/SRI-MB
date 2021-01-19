@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane fx:id="tabBuscadorPage" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="863.0" style="-fx-background-color: #000066;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.joseram0n.sri.TabBuscadorPageController">
+   <children>
+      <WebView fx:id="buscador" layoutX="14.0" layoutY="76.0" prefHeight="482.0" prefWidth="763.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="76.0" />
+      <ComboBox layoutX="14.0" layoutY="39.0" prefHeight="26.0" prefWidth="203.0" promptText="Seleccione..." />
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="136.0" text="Coleccion a buscar:" textFill="WHITE" />
+   </children>
+</AnchorPane>

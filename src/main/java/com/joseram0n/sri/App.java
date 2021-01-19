@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.image.Image;
 
 /**
  * Esta clase es la principal
@@ -16,7 +17,7 @@ import java.io.IOException;
 public class App extends Application {
     
     private static Scene scene;
-
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         /*
@@ -25,8 +26,9 @@ public class App extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         */
-        scene = new Scene(loadFXML("ventana"));
-        primaryStage.setTitle("SRI");
+        scene = new Scene(loadFXML("Ventana"));
+        primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("job-search.png")));
+        primaryStage.setTitle("Sistema de Recuperación de Información (SRI) - by Joseram0n");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

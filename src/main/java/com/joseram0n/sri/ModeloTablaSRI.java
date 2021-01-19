@@ -11,14 +11,24 @@ package com.joseram0n.sri;
  */
 public class ModeloTablaSRI {
     
+    int n_File;
     String nombreArchivo;
     int n_docs;
     String estado_index;
 
-    public ModeloTablaSRI(String nombreArchivo, int n_docs, String estado_index) {
+    public ModeloTablaSRI(int n_File, String nombreArchivo, int n_docs, String estado_index) {
+        this.n_File = n_File;
         this.nombreArchivo = nombreArchivo;
         this.n_docs = n_docs;
         this.estado_index = estado_index;
+    }
+
+    public int getN_File() {
+        return n_File;
+    }
+
+    public void setN_File(int n_file) {
+        this.n_File = n_file;
     }
 
     public String getNombreArchivo() {
@@ -44,8 +54,5 @@ public class ModeloTablaSRI {
     public void setEstado_index(String estado_index) {
         this.estado_index = estado_index;
     }
-    
-
-    
     
 }

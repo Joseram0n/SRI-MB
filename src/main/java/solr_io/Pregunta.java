@@ -21,6 +21,11 @@ public class Pregunta {
         texto = new String();
     }
 
+    public Pregunta(String id, String texto) {
+        this.id = id;
+        this.texto = texto;
+    }
+
     @Override
     public String toString() {
         return "Pregunta{" + "id=" + id + ", texto=" + texto + '}';

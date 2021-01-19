@@ -30,6 +30,31 @@
             <artifactId>solr-solrj</artifactId>
             <version>8.7.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-core</artifactId>
+            <version>12.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome5-pack</artifactId>
+            <version>12.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>                         
+            <artifactId>ikonli-fontawesome-pack</artifactId>              
+            <version>12.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.ac.gla.dcs.terrierteam</groupId>
+            <artifactId>jtreceval</artifactId>
+            <version>0.0.5</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -47,7 +72,7 @@
                 <version>0.0.5</version>
                 <configuration>
                     <mainClass>com.joseram0n.sri.App</mainClass>
-                    <executable>/usr/lib/jvm/java-11-openjdk-amd64/bin/java</executable>
+                    <!--win <executable>/usr/lib/jvm/java-11-openjdk-amd64/bin/java</executable> -->
                 </configuration>
             </plugin>
         </plugins>

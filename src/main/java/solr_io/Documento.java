@@ -23,6 +23,12 @@ public class Documento {
         texto = new String();
     }
 
+    public Documento(String id, String titulo, String texto) {
+        this.id = id;
+        this.titulo = titulo;
+        this.texto = texto;
+    }
+
     @Override
     public String toString() {
         return "Documento{" + "id=" + id + ", titulo=" + titulo + ", texto=" + texto + '}';

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane fx:id="tabServidorSolrPage" style="-fx-background-color: black;" styleClass="default-tab-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.joseram0n.sri.TabServidorSolrController">
+    <children>
+        <TabPane layoutX="3.0" prefHeight="571.0" prefWidth="790.0" style="-fx-background-color: gray;" styleClass="defaul-tab-pane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab text="Principal">
+                    <content>
+                        <VBox>
+                            <children>
+                                <AnchorPane focusTraversable="true" minHeight="157.0" minWidth="0.0" prefHeight="157.0" prefWidth="789.0" VBox.vgrow="NEVER">
+                                    <children>
+                                        <Button fx:id="btest" layoutX="681.0" layoutY="18.0" mnemonicParsing="false" onAction="#abrir_directorio_solr" prefHeight="26.0" prefWidth="78.0" text="Abrir" AnchorPane.rightAnchor="30.0" />
+                                        <TextField fx:id="solr_dir" editable="false" layoutX="133.0" layoutY="18.0" prefHeight="26.0" prefWidth="526.0" AnchorPane.leftAnchor="133.0" AnchorPane.rightAnchor="130.0" />
+                                        <Label layoutX="20.0" layoutY="23.0" text="Directorio Solr:" />
+                                        <Label layoutX="20.0" layoutY="83.0" text="ESTADO:">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="solr_estado" layoutX="118.0" layoutY="82.0" text="OFF" textFill="#eb0e0e">
+                                            <font>
+                                                <Font size="19.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="boton_OnOff" layoutX="217.0" layoutY="81.0" mnemonicParsing="false" onAction="#interruptor_Solr" text="ON / OFF">
+                                            <graphic>
+                                                <FontIcon iconLiteral="fas-power-off" />
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="382.0" prefWidth="789.0" style="-fx-background-color: #334a59;" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <TextArea fx:id="consola_out" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="757.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="14.0" />
+                                        <TextField fx:id="consola_in" layoutX="14.0" layoutY="338.0" onAction="#ejecutar_comando" prefHeight="26.0" prefWidth="671.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="104.0" />
+                                        <Button fx:id="bt_ejecutar" layoutX="699.0" layoutY="338.0" mnemonicParsing="false" onAction="#ejecutar_comando" text="Ejecutar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="18.0" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Panel Administrador (Web) ">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <WebView fx:id="vistaWeb" prefHeight="535.0" prefWidth="789.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
