@@ -63,6 +63,11 @@ public class SolrParser {
         return docs;
     }
 
+    /**
+     * Parsea las preguntas en un ArrayList de Pregunta
+     * @param doc_path
+     * @return 
+     */
     public ArrayList<Pregunta> leer_preguntas(String doc_path) {
 
         ArrayList<Pregunta> preg = new ArrayList<>();
@@ -93,6 +98,13 @@ public class SolrParser {
         return preg;
     }
 
+    /**
+     * Crea el fichero de trec top file
+     * @param resp_docs
+     * @param rutaArchivo
+     * @return
+     * @throws IOException 
+     */
     public boolean crear_trec_file(ArrayList<SolrDocumentList> resp_docs, String rutaArchivo) throws IOException {
         try {
             File f = new File(rutaArchivo);
@@ -187,6 +199,14 @@ public class SolrParser {
         return false;
     }
 
+    /**
+     * Procesa los Documentos normales a documentos de GATE
+     * @param docs
+     * @return
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException 
+     */
     public ArrayList<DocumentoGATE> procesar_doc_gate(ArrayList<Documento> docs) throws ParserConfigurationException, SAXException, IOException {
 
         Pattern org = Pattern.compile("<Organization>(.*?)<\\/Organization>");
@@ -240,9 +260,14 @@ public class SolrParser {
         //System.out.println(dgate.get(1));
         return dgate;
     }
-    
-    public ArrayList<PreguntaGATE> procesar_preguntas_gate(ArrayList<Pregunta> prg){
-        
+
+    /**
+     * Procesa los preguntas normales a documentos de GATE
+     * @param prg
+     * @return 
+     */
+    public ArrayList<PreguntaGATE> procesar_preguntas_gate(ArrayList<Pregunta> prg) {
+
         Pattern org = Pattern.compile("<Organization>(.*?)<\\/Organization>");
         Pattern loc = Pattern.compile("<Location>(.*?)<\\/Location>");
         ArrayList<PreguntaGATE> pgate = new ArrayList<>();
@@ -252,9 +277,9 @@ public class SolrParser {
             for (Pregunta p : prg) {
                 String organizacion = new String();
                 String localizacion = new String();
-                String id  = p.getId();
+                String id = p.getId();
                 String texto = p.getTexto();
-                
+
                 //texto
                 Matcher textoMatchOrg = org.matcher(texto);
                 Matcher textoMatchLoc = loc.matcher(texto);
@@ -282,6 +307,3 @@ public class SolrParser {
     }
 
 }
-
-
-//TODO: arreglar espacios de mas al final de los string

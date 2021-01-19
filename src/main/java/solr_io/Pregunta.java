@@ -8,7 +8,7 @@ package solr_io;
 import java.util.Objects;
 
 /**
- *
+ * Contiene la estructura de una pregunta
  * @author joseram0n
  */
 public class Pregunta {

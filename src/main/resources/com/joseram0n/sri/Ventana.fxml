@@ -77,8 +77,11 @@
                         <FontIcon iconLiteral="fas-ruler" iconSize="16" />
                     </graphic>
                 </Tab>
-                <Tab fx:id="buscadorTab" disable="true" text="Buscador">
+                <Tab fx:id="buscadorTab" text="Buscador">
                     <fx:include fx:id="tabBuscadorPage" source="tabBuscadorPage.fxml" />
+               <graphic>
+                  <FontIcon iconLiteral="fas-pencil-alt" iconSize="16" />
+               </graphic>
                 </Tab>
             </tabs>
         </TabPane>

@@ -69,8 +69,14 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="715.0">
                      <children>
-                        <Button layoutX="34.0" layoutY="162.0" mnemonicParsing="false" onAction="#cargarPreg" text="CargarPreguntas" />
-                        <Button layoutX="34.0" layoutY="242.0" mnemonicParsing="false" onAction="#crear_trec_file" text="Crear trec file" />
+                        <Button layoutX="34.0" layoutY="162.0" mnemonicParsing="false" onAction="#cargarPreg" text="Cargar Preguntas">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-file-upload" iconSize="12" />
+                           </graphic></Button>
+                        <Button layoutX="34.0" layoutY="242.0" mnemonicParsing="false" onAction="#crear_trec_file" text="Crear Archivo Trec-rel">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-file" iconSize="12" />
+                           </graphic></Button>
                         <TextField fx:id="txt_dirPreguntas" layoutX="33.0" layoutY="101.0" prefHeight="25.0" prefWidth="711.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="101.0" />
                         <ComboBox fx:id="core_selec_nEval" layoutX="34.0" layoutY="30.0" onContextMenuRequested="#actualizar_colecciones" onShown="#actualizar_colecciones" prefHeight="26.0" prefWidth="192.0" promptText="Selecciona un core..." />
                         <CheckBox fx:id="caracteresEspeciales" layoutX="190.0" layoutY="166.0" mnemonicParsing="false" selected="true" text="Quitar Caracteres Especiales" AnchorPane.leftAnchor="190.0" />
@@ -78,6 +84,11 @@
                         <Separator layoutY="218.0" prefHeight="0.0" prefWidth="789.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <Separator layoutX="392.0" layoutY="142.0" orientation="VERTICAL" prefHeight="66.0" prefWidth="0.0" AnchorPane.leftAnchor="392.0" AnchorPane.topAnchor="142.0" />
                         <CheckBox fx:id="disableWordCount" layoutX="419.0" layoutY="167.0" mnemonicParsing="false" onAction="#desactivarConteoPalabras" text="Numero de Palabras:" AnchorPane.leftAnchor="419.0" AnchorPane.topAnchor="167.0" />
+                        <Button layoutX="597.0" layoutY="242.0" mnemonicParsing="false" onAction="#crear_archivo_qrels" text="Crear Archivo Trec-qrels ">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-file" iconSize="12" />
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </content>

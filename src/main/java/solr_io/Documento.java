@@ -8,7 +8,7 @@ package solr_io;
 import java.util.Objects;
 
 /**
- *
+ * Simple clase que contiene la estructura de un documento
  * @author joseram0n
  */
 public class Documento {

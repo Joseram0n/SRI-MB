@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <AnchorPane fx:id="tabTrec_evalPage" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.joseram0n.sri.TabTrecEvalPageController">
     <children>
@@ -17,7 +18,10 @@
                     <content>
                         <AnchorPane>
                      <children>
-                        <Button layoutX="408.0" layoutY="139.0" mnemonicParsing="false" onAction="#realizar_eval" text="Evaluar" />
+                        <Button layoutX="408.0" layoutY="139.0" mnemonicParsing="false" onAction="#realizar_eval" text="Evaluar">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-search" iconSize="12" />
+                           </graphic></Button>
                         <TableView fx:id="tablaTrecEval" layoutX="21.0" layoutY="36.0" prefHeight="491.0" prefWidth="368.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="36.0">
                           <columns>
                             <TableColumn fx:id="col_medida" editable="false" prefWidth="266.0" text="MEDIDA" />
@@ -27,8 +31,14 @@
                         <Label layoutX="21.0" layoutY="13.0" text="Tabla de Resultado de Trec-Eval:" />
                         <TextField fx:id="txt_qrels" editable="false" layoutX="525.0" layoutY="36.0" prefHeight="25.0" prefWidth="260.0" AnchorPane.leftAnchor="527.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="36.0" />
                         <TextField fx:id="txt_rel" editable="false" layoutX="527.0" layoutY="77.0" prefHeight="25.0" prefWidth="259.0" AnchorPane.leftAnchor="527.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="77.0" />
-                        <Button layoutX="408.0" layoutY="36.0" mnemonicParsing="false" onAction="#selec_qrels" text="Seleccionar qrels" />
-                        <Button layoutX="408.0" layoutY="77.0" mnemonicParsing="false" onAction="#selec_res" text="Seleccionar res" />
+                        <Button layoutX="408.0" layoutY="36.0" mnemonicParsing="false" onAction="#selec_qrels" text="Seleccionar qrels">
+                           <graphic>
+                              <FontIcon iconLiteral="far-file" iconSize="12" />
+                           </graphic></Button>
+                        <Button layoutX="408.0" layoutY="77.0" mnemonicParsing="false" onAction="#selec_res" text="Seleccionar res">
+                           <graphic>
+                              <FontIcon iconLiteral="far-file" iconSize="12" />
+                           </graphic></Button>
                      </children></AnchorPane>
                     </content>
                 </Tab>

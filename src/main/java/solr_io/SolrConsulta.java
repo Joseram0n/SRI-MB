@@ -22,7 +22,7 @@ import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.CoreAdminParams.CoreAdminAction;
 
 /**
- *
+ * Clase que contiene los metodos para manejar la comunicacion con Solr
  * @author joseram0n
  */
 public class SolrConsulta {
@@ -43,6 +43,14 @@ public class SolrConsulta {
 
     }
 
+    /**
+     * Indexa el fichero segun el core
+     * @param rutaFichero
+     * @param nombreCore
+     * @return
+     * @throws SolrServerException
+     * @throws IOException 
+     */
     public boolean indexar(String rutaFichero, String nombreCore) throws SolrServerException, IOException {
 
         try {
@@ -85,7 +93,17 @@ public class SolrConsulta {
 
         return false;
     }
-
+    
+    /**
+     * Realiza las query contra solr
+     * @param rutaFichero
+     * @param nombreCore
+     * @param nPalabras
+     * @param quitarEspeciales
+     * @return
+     * @throws SolrServerException
+     * @throws IOException 
+     */
     public ArrayList<SolrDocumentList> buscar(String rutaFichero, String nombreCore, int nPalabras, boolean quitarEspeciales) throws SolrServerException, IOException {
 
         client = new HttpSolrClient.Builder("http://localhost:8983/solr/" + nombreCore).build();
@@ -93,44 +111,41 @@ public class SolrConsulta {
         ArrayList<Pregunta> prg = sp.leer_preguntas(rutaFichero);
 
         ArrayList<SolrDocumentList> resp_docs = new ArrayList<>();
-        
+
         SolrQuery query = new SolrQuery();
 
         if (nombreCore.contains("mejorado")) {
             ArrayList<PreguntaGATE> pg = sp.procesar_preguntas_gate(prg);
             for (PreguntaGATE p : pg) {
-                StringTokenizer aux = new StringTokenizer(p.getTexto(), "\\s+");
+                StringTokenizer aux = new StringTokenizer(p.getTexto());
+                int limite = nPalabras;
+                
                 if (nPalabras != -1) {
                     if (nPalabras > aux.countTokens()) {
-                        nPalabras = aux.countTokens();
+                        limite = aux.countTokens();
                     }
                 } else {
-                    nPalabras = aux.countTokens();
+                    limite = aux.countTokens();
                 }
 
                 String preg = new String();
                 String org = p.getOrganization();
                 String loc = p.getLocation();
-                
-                for (int i = 0; i < nPalabras; i++) {
+
+                for (int i = 0; i < limite; i++) {
                     preg += " " + aux.nextToken();
                 }
-                
+
                 if (quitarEspeciales) {
                     preg = ClientUtils.escapeQueryChars(preg);
                     org = ClientUtils.escapeQueryChars(org);
                     loc = ClientUtils.escapeQueryChars(loc);
                 }
 
-                //System.out.println("pregunta P: " + p);
-                //System.out.println("pregunta R2: " + preg);
-                
-                //query.setQuery("text:" + preg + " OR title:" + preg);
-                
-               query.setQuery("text:(" + preg + ") OR title:(" + preg + ")"
-                        //+ (org.isEmpty() ? "" : " OR organization:(" + org + ")")
+                query.setQuery("text:(" + preg + ") OR title:(" + preg + ")"
+                        + (org.isEmpty() ? "" : " OR organization:(" + org + ")")
                         + (loc.isEmpty() ? "" : " OR location:(" + loc + ")"));
-                
+
                 query.setFields("fl", "*,score");
 
                 QueryResponse rsp = client.query(query);
@@ -139,20 +154,21 @@ public class SolrConsulta {
             }
         } else {
             for (Pregunta p : prg) {
-                StringTokenizer aux = new StringTokenizer(p.getTexto(), "\\s+");
+                StringTokenizer aux = new StringTokenizer(p.getTexto());
+                int limite = nPalabras;
 
                 if (nPalabras != -1) {
                     if (nPalabras > aux.countTokens()) {
-                        nPalabras = aux.countTokens();
+                        limite = aux.countTokens();
                     }
                 } else {
-                    nPalabras = aux.countTokens();
+                    limite = aux.countTokens();
                 }
 
                 String preg = new String();
-                System.out.println("Npalabras: " + nPalabras);
-                for (int i = 0; i < nPalabras; i++) {
-                    preg += " " + aux.nextToken();
+
+                for (int i = 0; i < limite; i++) {
+                    preg += aux.nextToken() + " ";
                 }
 
                 /*
@@ -177,14 +193,11 @@ public class SolrConsulta {
         return resp_docs;
     }
 
-    /*
-    private String filtro_caracteres(String randomStr) {
-        StringBuilder sb = new StringBuilder();
-        for (int index = 0; index < randomStr.length(); index++) {
-            sb.append(randomStr.charAt(index) == '\'' ? "''" : randomStr.charAt(index));
-        }
-        return sb.toString();
-    }
+    /**
+     * Obtiene el nombre de los cores
+     * @return
+     * @throws SolrServerException
+     * @throws IOException 
      */
     public List<String> obtener_nombre_cores() throws SolrServerException, IOException {
 
@@ -202,6 +215,11 @@ public class SolrConsulta {
         return coreList;
     }
 
+    /**
+     * Limpia el core de documentos
+     * @param nombreCore
+     * @return 
+     */
     public boolean limpiar(String nombreCore) {
         boolean result = false;
         client = new HttpSolrClient.Builder("http://localhost:8983/solr/" + nombreCore).build();

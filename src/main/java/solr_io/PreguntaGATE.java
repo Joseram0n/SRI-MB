@@ -8,7 +8,7 @@ package solr_io;
 import java.util.Objects;
 
 /**
- *
+ * Contiene la estructura de una pregunta GATE
  * @author Joseram0n
  */
 public class PreguntaGATE extends Pregunta {

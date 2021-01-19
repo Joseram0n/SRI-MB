@@ -229,7 +229,7 @@ public class TabSriPageController implements Initializable {
             if (selectedDirectory != null) {
                 sp.crear_trec_file(sdl, selectedDirectory.getAbsolutePath() + "/trec_top_file.test");
                 System.out.println(selectedDirectory.getAbsolutePath() + "\\trec_top_file.test");
-                
+
                 Alert al = new Alert(Alert.AlertType.CONFIRMATION);
                 al.setTitle("Archivo Trec-rel");
                 al.setHeaderText("Todo ok!");
@@ -346,7 +346,33 @@ public class TabSriPageController implements Initializable {
         return salida;
     }
 
+    @FXML
     public void crear_archivo_qrels() {
+        SolrParser sp = new SolrParser();
 
+        selecFicheros = new FileChooser();
+        selecFicheros.setTitle("Seleccione el fichero LISARJ.NUM");
+        selecFicheros.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("All Files", "*.*"));
+
+        File p = selecFicheros.showOpenDialog(null);
+
+        if (p != null) {
+            try {
+                sp.generar_consultas_relevantes(p.getAbsolutePath());
+
+                Alert al = new Alert(Alert.AlertType.CONFIRMATION);
+                al.setTitle("Archivo Qrels");
+                al.setHeaderText("Todo bien!");
+                al.setContentText("Se ha generado en el mismo directorio que LISARJ.NUM");
+                al.showAndWait();
+            } catch (IOException ex) {
+                Logger.getLogger(TabSriPageController.class.getName()).log(Level.SEVERE, null, ex);
+                Alert al = new Alert(Alert.AlertType.ERROR);
+                al.setTitle("Archivo Qrels");
+                al.setHeaderText("OPSSSSSSSS!");
+                al.setContentText("NO se ha generado bien.");
+                al.showAndWait();
+            }
+        }
     }
 }

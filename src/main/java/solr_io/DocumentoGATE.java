@@ -8,7 +8,7 @@ package solr_io;
 import java.util.Objects;
 
 /**
- *
+ * Simple clase que contiene la estructura de un documento con GATE
  * @author Joseram0n
  */
 public class DocumentoGATE extends Documento{

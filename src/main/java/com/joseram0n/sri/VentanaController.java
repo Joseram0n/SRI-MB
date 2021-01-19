@@ -141,9 +141,6 @@ public class VentanaController implements Initializable {
     }
 
     //[fcom] para enconjer en netbeans
-//<editor-fold defaultstate="collapsed" desc="Ventana: Servidor Solr">
-
-//</editor-fold>
 
     public void acerca() {
         Alert al = new Alert(AlertType.INFORMATION);
